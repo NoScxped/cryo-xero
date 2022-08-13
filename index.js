@@ -1,0 +1,6 @@
+const {ShardingManager} = require("discord.js")
+const conf = require(`./configuration.json`)
+const fs = require('fs')
+const mngr = new ShardingManager(`./cyro.js`, {token: conf.token, respawn: true, totalShards: 1})
+eval(fs.readFileSync(`./startup/register.js`, 'utf-8'))
+mngr.spawn()
