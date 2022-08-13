@@ -67,4 +67,39 @@ client.on(`interactionCreate`, async interaction => {
 }
 })
 
+
+client.on(`guildMemberAdd`, async guildMember => {
+
+    if(data.exists(`./data/guild/${guildMember.guild.id}.json`)){
+        if(data.read(`./data/guild/${guildMember.guild.id}.json`, 'welcomeChannel')){
+
+            var welcomeChannel = data.read(`./data/guild/${guildMember.guild.id}.json`, 'welcomeChannel')
+
+            try {
+
+                if(data.read(`./data/guild/${guildMember.guild.id}.json`, 'welcomeMessage')){
+
+                    var message = data.read(`./data/guild/${guildMember.guild.id}.json`, 'welcomeMessage')
+                    message = message.replace(/{servername}/g, guildMember.guild.name).replace(/{username}/g, guildMember.user.username).replace(/{userping}/g, guildMember.user).replace(/{servermembers}/g, guildMember.guild.memberCount)
+
+                    client.channels.cache.get(welcomeChannel.toString()).send(message)
+
+                    } else {
+                    
+                        client.channels.cache.get(welcomeChannel.toString()).send(`Welcome to the server, <@!${guildMember.id}>!`)
+
+                }
+                
+
+            } catch (err) {
+
+                return console.log(err)
+
+            }
+
+        }
+    }
+
+})
+
 client.login(config.token)

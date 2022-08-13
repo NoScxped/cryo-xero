@@ -52,12 +52,12 @@ module.exports = {
 	async execute(interaction, data, client, Discord, splashtext) {
 
         
-        if(interaction.options.getSubcommand() === 'stats'){
+        if(interaction.options.getSubcommand() === 'info'){
 
             const sent = await interaction.reply({ content: '<a:typing:1000730579542736927> *Cyro is thinking* <a:typing:1000730579542736927>', fetchReply: true});
 
             var embed = new MessageEmbed()
-                .setAuthor({name: "*" + interaction.guild.name + "*"})
+                .setTitle("*" + interaction.guild.name + "*")
                 .addFields([
                     {name: '__Member Count__', value: interaction.guild.memberCount.toString()},
                     {name: '__Creation Date__', value: interaction.guild.createdAt.toString()}
@@ -69,6 +69,7 @@ module.exports = {
             await sent.edit({content: "_ _",embeds: [embed]})
 
         } else {
+            
             if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){ 
 
                 if (interaction.options.getSubcommand() === 'name'){
