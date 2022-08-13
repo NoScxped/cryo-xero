@@ -31,47 +31,43 @@ module.exports = {
                 ))),
 	async execute(interaction, data, client, Discord, splashtext) {
 
-        
-        if (interaction.options.getSubcommand() === 'nsfw'){
+        if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
 
-            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
+            if (interaction.options.getSubcommand() === 'nsfw'){
 
                 try {
 
                     interaction.channel.setNSFW(interaction.options.getBoolean(`nsfw`))
-
-                        return interaction.reply(`<:checkmark:1000737491621523488> *Channel updated successfully!* <:checkmark:1000737491621523488>`)
+                    return interaction.reply(`<:checkmark:1000737491621523488> *Channel NSFW Status updated!* <:checkmark:1000737491621523488>`)
 
                 } catch {
 
-                    return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Channel!* <:xmark:1000738231886811156>`)
+                    return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Channel NSFW Status!* <:xmark:1000738231886811156>`)
 
                 }
-            } else {
-
-                return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Channel!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
-
-            }
-        } else if (interaction.options.getSubcommand() === 'slowmode'){
-
-            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
+        
+        
+            } else if (interaction.options.getSubcommand() === 'slowmode'){
 
                 try {
 
                     interaction.channel.setRateLimitPerUser(parseInt(interaction.options.getString(`slowmode`)))
-
-                        return interaction.reply(`<:checkmark:1000737491621523488> *Channel Slowmode updated successfully!* <:checkmark:1000737491621523488>`)
+                    return interaction.reply(`<:checkmark:1000737491621523488> *Channel Slowmode updated!* <:checkmark:1000737491621523488>`)
 
                 } catch {
 
                     return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Channel Slowmode!* <:xmark:1000738231886811156>`)
 
                 }
-            } else {
-
-                return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Channel!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
-
+                
             }
+
+        } else {
+
+            return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Channel!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
+
         }
+
     }
+
 }

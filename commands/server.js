@@ -68,112 +68,88 @@ module.exports = {
 
             await sent.edit({content: "_ _",embeds: [embed]})
 
-        } else if (interaction.options.getSubcommand() === 'name'){
+        } else {
+            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){ 
 
-            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
+                if (interaction.options.getSubcommand() === 'name'){
+        
+                        try {
+        
+                            interaction.guild.edit({
+                                name: interaction.options.getString(`name`),
+                            })
+        
+                                return interaction.reply(`<:checkmark:1000737491621523488> *Server Name updated successfully!* <:checkmark:1000737491621523488>`)
+        
+                        } catch {
+        
+                            return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Name!* <:xmark:1000738231886811156>`)
+        
+                        }
 
-                try {
+                } else if (interaction.options.getSubcommand() === 'notifications'){
+        
+                        try {
+        
+                            interaction.guild.setDefaultMessageNotifications(parseInt(interaction.options.getString(`type`)))
+        
+                                return interaction.reply(`<:checkmark:1000737491621523488> *Server Notification Settings updated successfully!* <:checkmark:1000737491621523488>`)
+        
+                        } catch {
+        
+                            return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
+        
+                        }
+        
+                } else if (interaction.options.getSubcommand() === 'boostprogressbar') {
+        
+                        try {
+        
+                            interaction.guild.setPremiumProgressBarEnabled(interaction.options.getBoolean(`progress`))
+        
+                                return interaction.reply(`<:checkmark:1000737491621523488> ***Show Server Boost Progress Bar** is set to **${interaction.options.getBoolean(`progress`).toString()}**!* <:checkmark:1000737491621523488>`)
+        
+                        } catch {
+        
+                            return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
+        
+                        }
 
-                    interaction.guild.edit({
-                        name: interaction.options.getString(`name`),
-                    })
-
-                        return interaction.reply(`<:checkmark:1000737491621523488> *Server Name updated successfully!* <:checkmark:1000737491621523488>`)
-
-                } catch {
-
-                    return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Name!* <:xmark:1000738231886811156>`)
-
+                } else if (interaction.options.getSubcommand() === 'verification'){
+   
+                        try {
+        
+                            interaction.guild.setVerificationLevel(parseInt(interaction.options.getString(`verification`)))
+        
+                                return interaction.reply(`<:checkmark:1000737491621523488> *Verification Level Updated!* <:checkmark:1000737491621523488>`)
+        
+                        } catch {
+        
+                            return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
+        
+                        }
+        
+                } else if (interaction.options.getSubcommand() === 'contentfilter'){
+        
+                        try {
+        
+                            interaction.guild.setExplicitContentFilter(parseInt(interaction.options.getString(`filter`)))
+        
+                                return interaction.reply(`<:checkmark:1000737491621523488> *Content Filter Updated!* <:checkmark:1000737491621523488>`)
+        
+                        } catch {
+        
+                            return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
+        
+                        }
+        
                 }
-            } else {
 
+            } else {
+        
                 return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Name!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
-
+            
             }
-        } else if (interaction.options.getSubcommand() === 'notifications'){
-
-            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
-
-                try {
-
-                    interaction.guild.setDefaultMessageNotifications(parseInt(interaction.options.getString(`type`)))
-
-                        return interaction.reply(`<:checkmark:1000737491621523488> *Server Notification Settings updated successfully!* <:checkmark:1000737491621523488>`)
-
-                } catch {
-
-                    return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
-
-                }
-            } else {
-
-                return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
-
-            }
-
-        } else if (interaction.options.getSubcommand() === 'boostprogressbar') {
-
-            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
-
-                try {
-
-                    interaction.guild.setPremiumProgressBarEnabled(interaction.options.getBoolean(`progress`))
-
-                        return interaction.reply(`<:checkmark:1000737491621523488> ***Show Server Boost Progress Bar** is set to **${interaction.options.getBoolean(`progress`).toString()}**!* <:checkmark:1000737491621523488>`)
-
-                } catch {
-
-                    return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
-
-                }
-            } else {
-
-                return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
-
-            }
-
-        } else if (interaction.options.getSubcommand() === 'verification'){
-
-            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
-
-                try {
-
-                    interaction.guild.setVerificationLevel(parseInt(interaction.options.getString(`verification`)))
-
-                        return interaction.reply(`<:checkmark:1000737491621523488> *Verification Level Updated!* <:checkmark:1000737491621523488>`)
-
-                } catch {
-
-                    return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
-
-                }
-            } else {
-
-                return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
-
-            }
-
-        } else if (interaction.options.getSubcommand() === 'contentfilter'){
-
-            if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_GUILD])){
-
-                try {
-
-                    interaction.guild.setExplicitContentFilter(parseInt(interaction.options.getString(`filter`)))
-
-                        return interaction.reply(`<:checkmark:1000737491621523488> *Content Filter Updated!* <:checkmark:1000737491621523488>`)
-
-                } catch {
-
-                    return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>`)
-
-                }
-            } else {
-
-                return interaction.reply(`<:xmark:1000738231886811156> *Failed to update Server Settings!* <:xmark:1000738231886811156>\n\n*You are missing the following Permissions!*\n\n**- Manage Server**`)
-
-            }
-
-        }
+        } 
     }
 }
