@@ -12,6 +12,7 @@
     "@discordjs/rest": "^1.0.1",
     "apollo.data": "^1.0.2",
     "discord-api-types": "^0.37.2",
-    "discord.js": "^13.10.2"
+    "discord.js": "^13.10.2",
+    "kuiper.json": "^1.2.1"
   }
 }

@@ -43,6 +43,26 @@ client.on('ready', () => {
         console.error(err)
     }
 })
+
+const msgfeatures = fs.readdirSync(path.resolve('./messageInteractions')).filter(file => file.endsWith(`.js` || `.ts`))
+var features = new Set()
+for (const file of msgfeatures){
+    try {
+    features.add(file)
+}
+    catch(err) {
+        console.error(err)
+    }
+}
+
+client.on('messageCreate', message => {
+
+     features.forEach((msgfeature) => {
+         eval(fs.readFileSync(`./messageInteractions/${msgfeature}`, "utf-8"))
+     })  
+
+})
+
 //slash commands
 client.on(`interactionCreate`, async interaction => {
     if(interaction.isCommand()){
