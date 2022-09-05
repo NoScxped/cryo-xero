@@ -2,3 +2,4 @@ node_modules
 configuration.json
 data/guild
 data/user
+package-lock.json
