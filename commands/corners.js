@@ -70,7 +70,7 @@ module.exports = {
 
         if(interaction.options.getSubcommand() === 'rename'){
 
-            var name = interaction.options.getString(`rename`)
+            var name = interaction.options.getString(`rename`).slice(0,30)
             var corners = data.read(`./data/guild/${interaction.guild.id}.json`, 'corners')
 
             if(corners === undefined){return interaction.reply(`<:xmark:1000738231886811156> *You don't have a corner!* <:xmark:1000738231886811156>`)}
@@ -79,7 +79,7 @@ module.exports = {
 
             if(data.exists(`./data/guild/${interaction.guild.id}.json`, 'cornerCategory') && data.read(`./data/guild/${interaction.guild.id}.json`, 'enableCorners') === 'true'){
 
-                interaction.guild.channels.fetch(corners[`${interaction.user.id}`]).then(channel => {channel.setName(name)})
+                interaction.guild.channels.fetch(corners[`${interaction.user.id}`]).then(channel => {channel.setTopic(`Solace Corner for <@!${interaction.user.id}>`); channel.setName(name)})
                 return interaction.reply(`<:checkmark:1000737491621523488> *Corner Renamed!* <:checkmark:1000737491621523488>`)
 
             }
@@ -100,7 +100,7 @@ module.exports = {
 
                     var name = interaction.user.username + `s-corner`
 
-                    if(interaction.options.getString(`name`)){name = interaction.options.getString(`name`)}
+                    if(interaction.options.getString(`name`)){name = interaction.options.getString(`name`).slice(0,35)}
 
                     var category =  data.read(`./data/guild/${interaction.guild.id}.json`, 'cornerCategory')
 
@@ -110,7 +110,7 @@ module.exports = {
         
                             try {
 
-                            interaction.guild.channels.create(name).then(channel => { channel.setTopic(`Solace Corner for ${interaction.user.username}#${interaction.user.discriminator}`); channel.setParent(category); data.write(`./data/guild/${interaction.guild.id}.json`, 'corners', JSON.parse(`{"${interaction.user.id}": "${channel.id}"}`))})
+                            interaction.guild.channels.create(name).then(channel => { channel.setTopic(`Solace Corner for <@!${interaction.user.id}>`); channel.setParent(category); data.write(`./data/guild/${interaction.guild.id}.json`, 'corners', JSON.parse(`{"${interaction.user.id}": "${channel.id}"}`))})
                             interaction.reply(`<:checkmark:1000737491621523488> *Corner Created!* <:checkmark:1000737491621523488>`)
         
                     } catch {
