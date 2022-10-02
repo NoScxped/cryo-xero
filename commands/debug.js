@@ -26,14 +26,14 @@ module.exports = {
         }
 
         var embed = new MessageEmbed()
-        .setAuthor({name: 'Cyro-Xero',icon: `https://discord.gg/THZqsK3HTM`, iconURL: `https://cdn.discordapp.com/attachments/752366102683582646/1000916536598474793/logo.png`})
+        .setAuthor({name: 'Solace-Xero',icon: `https://discord.gg/THZqsK3HTM`, iconURL: `https://cdn.discordapp.com/attachments/752366102683582646/1000916536598474793/logo.png`})
         .addFields([
             {name: '__Total Servers__', value: client.guilds.cache.size.toString()},
             {name: '__Servers in Storage__', value: getAllFiles('./data/guild/').length.toString()}
         ])
         .setDescription(`*Ping:* ***${sent.createdTimestamp - interaction.createdTimestamp}ms***`)
         .setColor(`9400D3`)
-        .setFooter({ text: `Cyro-Xero v` + info.version, iconURL: client.user.avatarURL() });
+        .setFooter({ text: `Solace-Xero v` + info.version, iconURL: client.user.avatarURL() });
         await sent.edit({content: "_ _",embeds: [embed]})
         
         

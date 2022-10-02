@@ -9,7 +9,7 @@ module.exports = {
         const msg = await interaction.reply({ content: '<a:typing:1000730579542736927> *Cyro is thinking* <a:typing:1000730579542736927>', fetchReply: true});
 
         var embed = new MessageEmbed()
-        .setAuthor({ name: 'Cyro-Xero', iconURL: interaction.user.avatarURL(), url: interaction.user.avatarURL() })
+        .setAuthor({ name: 'Solace-Xero', iconURL: interaction.user.avatarURL(), url: interaction.user.avatarURL() })
         .setTitle(`Help`)
         .setDescription(`*Select a command to get more information!*`)
         .setColor("9400D3")

@@ -3,12 +3,12 @@ const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
     .setName('invite')
-    .setDescription('Invite Cyro to your server!')
+    .setDescription('Invite Solace to your server!')
     .toJSON(),
 
     async execute(interaction, data, client, Discord, splashtext) {
        var embed = new MessageEmbed()
-        .setAuthor({name: "Cyro Discord Bot"})
+        .setAuthor({name: "Solace Discord Bot"})
         .setDescription(`[*Join the Discord Server*](https://discord.gg/THZqsK3HTM)`)
         .addFields([
             {name: `__Utilities__`, value: `*Small utilities to make your Discord experience THAT much better!*`, inline: true}
@@ -16,10 +16,6 @@ module.exports = {
         .setColor('RANDOM')
         const row = new MessageActionRow()
 		.addComponents(
-            new MessageButton()
-				.setLabel(`Invite Cyro to your Server!`)
-				.setStyle('LINK')
-                .setURL("https://discord.com/api/oauth2/authorize?client_id=1007801785399906314&permissions=2147757168&scope=bot%20applications.commands"),
 			new MessageButton()
 				.setLabel(`Invite Solace to your Server!`)
 				.setStyle('LINK')

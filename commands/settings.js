@@ -11,7 +11,7 @@ module.exports = {
             .addChannelOption(option => option.setName('channel').setDescription('Counting Channel').setRequired(true)))
     .toJSON(),
 
-    async execute(interaction, data, client, Discord, splashtext) {
+    async execute(interaction, data, client, Discord) {
         
         if(interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR]) || interaction.member.permissions.has([Permissions.FLAGS.MANAGE_CHANNELS])){
 

@@ -11,14 +11,13 @@ module.exports = {
     .addMentionableOption(option => option.setName('ping').setDescription('Add a Ping'))
     .toJSON(),
 
-    async execute(interaction, data, client, Discord, splashtext) {
+    async execute(interaction, data, client, Discord) {
 
         var embed = new MessageEmbed()
         .setTitle(interaction.options.getString('title'))
         .setColor("a6dced")
         .setDescription("*" + interaction.options.getString('description') + "*")
         .setAuthor({ name: 'Created by ' + interaction.user.username, iconURL: interaction.user.avatarURL(), url: interaction.user.avatarURL() })
-        .setFooter({ text: splashtext, iconURL: client.user.avatarURL() });
 
         var channel = interaction.channel
 

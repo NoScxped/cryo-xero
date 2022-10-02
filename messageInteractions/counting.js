@@ -35,7 +35,7 @@ if(data.exists(`./data/guild/${message.guild.id}.json`)){
                                     }
                                     
     
-                                    data.write(`./data/guild/${message.guild.id}.json`, `countingNumber`, '0')
+                                    data.write(`./data/guild/${message.guild.id}.json`, `countingNumber`, 0)
                                     data.delete(`./data/guild/${message.guild.id}.json`, `lastCountingId`)
         
                                     var embed = new MessageEmbed()
@@ -47,16 +47,16 @@ if(data.exists(`./data/guild/${message.guild.id}.json`)){
         
                                 } else {
         
-                                    data.write(`./data/guild/${message.guild.id}.json`, `countingNumber`, num.toString())
-                                    data.write(`./data/guild/${message.guild.id}.json`, `lastCountingId`, message.author.id.toString())
+                                    data.write(`./data/guild/${message.guild.id}.json`, `countingNumber`, num)
+                                    data.write(`./data/guild/${message.guild.id}.json`, `lastCountingId`, message.author.id)
     
                                     if(data.exists(`./data/user/${message.author.id}.json`, 'counted')){
     
                                         var add = parseInt(data.read(`./data/user/${message.author.id}.json`, 'counted')) + 1
-                                        data.write(`./data/user/${message.author.id}.json`, 'counted', add.toString())
+                                        data.write(`./data/user/${message.author.id}.json`, 'counted', add)
     
                                     } else {
-                                        data.write(`./data/user/${message.author.id}.json`, 'counted', `1`)
+                                        data.write(`./data/user/${message.author.id}.json`, 'counted', 1)
                                     }
     
                                     try {

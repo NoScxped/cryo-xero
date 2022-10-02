@@ -1,5 +1,5 @@
 const {Discord, Client, Collection, MessageEmbed, Intents, Permissions} = require('discord.js')
-const data = require('apollo.data')
+const data = require('kuiper.json')
 const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES],
     allowedMentions: {
